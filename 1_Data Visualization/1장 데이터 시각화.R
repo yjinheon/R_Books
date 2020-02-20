@@ -3,6 +3,7 @@
 quote<- "간단한 그래프는 데이터 분석가에게 다른 어떤 것보다도 많은 정보를 제공한다."
 
 #1.1.1 준비하기_타이디버스 로드하기
+install.packages("tidyverse")
 library(tidyverse)
 library(ggplot2)
 
@@ -65,5 +66,116 @@ ggplot(data=mpg)+
 #1.3.1 연습문제 
 
 #1. 코드가 파란색이 아닌 이유는 "blue"가 일종의 컬러 범주로 심미성 매핑에 포함되어서이다.
-#2. 
+#2. 연속형 변수를 여러방식으로 매핑하기
+library(ggplot2)
+ggplot(data=mpg)+
+  geom_point(mapping = aes(x=displ,y=hwy,color=class)) # 컬러로 매핑
+
+
+library(ggplot2)
+ggplot(data=mpg)+
+  geom_point(mapping = aes(x=displ,y=hwy,size=class)) # 크기로 매핑
+#범주형 변수를 사이즈로 매핑하는 것은 권장되지 않는다.
+
+
+library(ggplot2)
+ggplot(data=mpg)+
+  geom_point(mapping = aes(x=displ,y=hwy,shape=class))# 모양으로 매핑
+
+#3. stroke 심미성의 역할이 무엇인가?
+# stroke는 모양의 경계선의 두께를 결정한다.
+#Stroke changes the size of the border for shapes (21-25). These are filled shapes in which the color and size of the border can differ from that of the filled interior of the shape.
+
+# 예를들면 이런 느낌이다.
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point(shape = 21, colour = "black", fill = "white", size = 5, stroke = 5)
+
+
+# 6.심미성을 변수 이름이 아닌 것에 매핑할 경우
+
+ggplot(data = mpg)+
+  geom_point(
+    mapping = aes(x=displ,y=hwy,color=displ<5)
+  )
+
+#1.4 자주일어나는 문제들 
+# 온갖 프로그래밍를 하다보명 개같은 문제들이 매일 하루도 빠지지 않고 일어난다.
+
+
+#1.5 facet 플롯을 면분할 하기
+
+# * facet_wrap()에 전달하는 변수는 이산형이어야 한다.
+
+ggplot(data = mpg)+
+  geom_point(mapping=aes(displ,hwy))+
+  facet_wrap(~class,nrow = 2) # class별로 나눠서 계산하기기
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(displ,hwy))+
+  facet_grid(drv~cyl) # 플롯을 두 변수 조합으로 면분할하기
+
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(displ,hwy))+
+  facet_grid(.~cyl) # 기본적으로 뒤에 있는게 열분할 
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(displ,hwy))+
+  facet_grid(cyl~.) # 앞에 넣으면 행분할 
+
+
+#1.6 기하객체 (geom)
+
+#geom은 데이터를 나타내기 위해 플롯이 사용하는 기하객체를 의미한다 . 사람들은 플롯이 사용하는 지옴의 유형으로 플롯을 기술한다.
+
+#해보자
+
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x=displ,y=hwy)) # 기본 그래프
+
+ggplot(data = mpg)+
+  geom_smooth(mapping = aes(x=displ,y=hwy)) # 평활선을 그려주는 그래프
+
+ggplot(data = mpg)+
+  geom_smooth(mapping = aes(x=displ,y=hwy,linetype=drv)) # 평활선을 그려주는 그래프
+
+
+# 위의 두개를 겹쳐서 그린 다음에 색을 넣어보자 
+
+
+ggplot(data = mpg)+
+  geom_point(mapping=aes(x=displ,y=hwy,shape=drv,color=drv))+
+  geom_smooth(mapping=aes(x=displ,y=hwy,linetype=drv,color=drv))
+
+
+##################################################################
+ggplot(data=mpg)+
+  geom_smooth(
+    mapping=aes(x=displ,y=hwy,color=drv),
+    show.legend = FALSE
+  ) 
+
+# 같은 플롯에 여러 지옴을 표시하기
+
+ggplot(data=mpg)+
+  geom_point(mapping = aes(displ,hwy))+
+  geom_smooth(mapping = aes(displ,hwy))
+
+
+# 매핑 집합을 ggplot으로 전달하기 -> 매핑을 전역매핑으로 설정
+# 이 경우 ggplot2는 매핑들을 전역매핑으로 처리하여 그래프의 각 지옴에 전달한다.
+ggplot(data = mpg,mapping = aes(displ,hwy))+
+  geom_point()+
+  geom_smooth()
+
+# 매칭을 전역 매핑이 아닌 지옴함수마다 처리하는 것으로 할 경우 
+
+
+
+
+
+
+
+
 

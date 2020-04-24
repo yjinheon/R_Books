@@ -1,0 +1,16 @@
+---
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### 2.1.2 벡터에 보통 쓰는 함수들
+R에서 쓰는 함수들은
+
+|   함수	|  쓰는 경우 	|
+|---	|---	|
+|   sort()	|  데이터 정렬 	|
+|   table()	|  데이터의 빈도반환 	|
+|   unique()	|   고윳값 반환	|
+|   rev()	| 데이터 역으로 정렬  	|

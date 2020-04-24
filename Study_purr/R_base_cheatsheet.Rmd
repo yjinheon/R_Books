@@ -1,0 +1,89 @@
+---
+title: "purr을 활용한 반복"
+author: "JinHeon Yoon"
+date: '2020 4 14 '
+output: 
+ html_document:
+  fig_height: 6
+  fig_width: 10
+  highlight: textmate
+  theme: cosmo
+  toc: true
+  toc_depth: 4
+  toc_float: true
+highlight: textmate
+theme: cosmo
+header-includes: \usepackage{kotex}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=T, fig.align = "center", message=F, warning=F, fig.height = 8, cache=T, dpi = 300)
+```
+
+
+>
+## 1. 패키지 설치 및 자료 불러오기
+>
+
+### 1.1 패키지 설치하기
+CRAN에 등록되어 있는 패키지는 다음과 같은 명령을 통해 간단하게 설치할 수 있습니다.
+
+install.packages("purr") 
+
+타이디버스에 묶이는 패키지를 한번에 설치해줄 수도 있습니다.
+
+install.packages("tidyverse")
+
+### 1.2 데이터적재
+ 
+```{r paged.print=TRUE}
+library(dplyr)
+library(tidyr)
+kbo <- read.csv("kbo.csv") %>% as_tibble()
+head(kbo)
+
+```
+
+## 2. 데이터 구조
+>R이 SPSS나 SAS와는 달리 다양한 데이터를 빠르게 처리하고 분석할 수 있는 이유는 단순히 행렬형태로 이루어진 데이터구조 이외에도 배열,리스트등과 같이 특수한 데이터 구조 또한 지원하기 때문입니다.R의 데이터 구조별 특성에 대해 이해하면 많은 데이터를 한번에 처리하는 코드를 보다 쉽게 이해할 수 있습니다.
+
+### 2.1 벡터
+
+#### 2.1.1 벡터 생성하기
+```{r}
+c(2,4,8) # 요소들을 벡터로 결합하기
+2:6 # 2에서 6까지 출력하기
+seq(2,3,by=0.5) # sequence 생성
+rep(1:2, times=3) # 함수에 들어가는 인자에 따라 결과가 약간 다릅니다.
+rep(1:3, each=3)
+```
+
+#### 2.1.2 벡터에 보통 쓰는 함수들
+R에서 쓰는 함수들은
+
+|   함수	|  쓰는 경우 	|
+|---	|---	|
+|   sort()	|  데이터 정렬 	|
+|   table()	|  데이터의 빈도반환 	|
+|   unique()	|   고윳값 반환	|
+|   rev()	| 데이터 역으로 정렬  	|
+
+
+#### 2.1.3 벡터 인덱싱
+R을 쓰다보면 데이터의 특정 요소만 가져와서 쓰거나 특정조건에 해당하는 데이터만 추출해서 써야할 일이 매우 많습니다. 여기서는 인덱스를 활용한 선택, 값을 활용한 선택,이름을 활용한 선택을 알아보겠습니다. 
+
+인덱스에 따른 선택
+```{r,fig.width=8, fig.height=6}
+x <- sample(x=1:100,size = 10) # 1에서 100중에 랜덤으로 10개정도 선택
+x[4] # x의 4번째
+x[-4] # x의 4번째 빼고나머지
+x[2:4] # 2,3,4 번째 선택
+x[-(2:4)] # 2,3,4 번째 빼고 전부
+x[c(1,5)] # 1,5 번째 선택
+
+```
+
+>참고해야할 것 
+purr 블로그
+R을 활용한 데이터 과학
+purr 블로그_영문

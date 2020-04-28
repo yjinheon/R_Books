@@ -65,8 +65,9 @@ ggplot(data=mpg)+
 
 #1.3.1 연습문제 
 
-#1. 코드가 파란색이 아닌 이유는 "blue"가 일종의 컬러 범주로 심미성 매핑에 포함되어서이다.
-#2. 연속형 변수를 여러방식으로 매핑하기
+1. 코드가 파란색이 아닌 이유는 "blue"가 일종의 컬러 범주로 심미성 매핑에 포함되어서이다.
+2. 연속형 변수를 여러방식으로 매핑하기
+
 library(ggplot2)
 ggplot(data=mpg)+
   geom_point(mapping = aes(x=displ,y=hwy,color=class)) # 컬러로 매핑

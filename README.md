@@ -1,6 +1,6 @@
-*책 공부용 저장소
+# 책 공부용 저장소
 
-** R for DataScience
+* R for DataScience
    Hadley Wickham R practice
    use markdown
 * Hands on R Programming

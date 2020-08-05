@@ -1,7 +1,7 @@
 # 책 공부용 저장소
 
 * R for DataScience
-   Hadley Wickham R practice
+   Hadley Wickham R practice  
    use markdown
 * Hands on R Programming
 * 실리콘밸리 데이터과학자가 알려주는 따라하며 배우는 데이터과학
